@@ -91,6 +91,7 @@ p#message {
         transform: rotate(360deg);
     }
 }
+
 /* Spinner style end*/
 
 .cover-page {
@@ -116,6 +117,7 @@ p#message {
 }
 
 .cover-page {
+
     & h1,
     & h3 {
         font-weight: 600;
@@ -152,16 +154,20 @@ p#message {
 .table>thead.table-light {
     --bs-table-bg: #3b4a65 !important;
 }
+
 .table tbody tr:last-of-type {
     border-bottom: 0;
 }
+
 .table>:not(caption)>*>* {
     padding: 0.8rem .8rem;
 }
+
 .available {
     background-color: #d4edda !important;
     cursor: pointer;
 }
+
 .unavailable {
     background-color: #f8d7da !important;
     color: #6c757d;
@@ -235,8 +241,9 @@ td:hover.available {
 
 .card-widgets {
     background-color: #fff;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 8px;
+    margin-top: 5px;
 
     & h2 {
         color: #414f66;
@@ -269,6 +276,7 @@ td:hover.available {
     & thead th:first-child {
         border-top-left-radius: 10px;
     }
+
     & th,
     & td {
         padding: 12px 15px;
@@ -296,9 +304,11 @@ td:hover.available {
         top: 50px;
     }
 }
+
 .table thead tr>* {
     color: #fff !important;
-    }
+}
+
 /* Table style end */
 
 /* Navigation style*/
@@ -313,28 +323,70 @@ td:hover.available {
         font-weight: 500;
     }
 }
+
 #profile,
 #home {
     font-size: 1.8rem !important;
     color: #fff;
 }
+
 .navbar-brand {
     font-size: 2rem;
     font-family: emoji;
     margin-bottom: 0 !important;
     font-weight: 900 !important;
     color: #98afbd;
+
     &:hover {
         color: #98afbd;
     }
 }
+
 .right-sec {
     gap: 2rem;
 }
+
 .navbar-nav {
     gap: 5px;
 }
+
 .navbar_custom {
     background: linear-gradient(4deg, #283652, #c2d8d4c9);
 }
+
 /* Navigation ends*/
+
+/* Table scrollbar */
+.table-container {
+    height: 15rem;
+
+    & table {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        width: 100%;
+    }
+
+    & table thead {
+        flex: 0 0 auto;
+        width: calc(100% - 0.9em);
+    }
+
+    & table tbody {
+        flex: 1 1 auto;
+        display: block;
+        overflow-y: scroll;
+    }
+
+    & table tbody tr {
+        width: 100%;
+    }
+
+    & table thead,
+    & table tbody tr {
+        display: table;
+        table-layout: fixed;
+    }
+}
+
+/* Table scrollbar end */
