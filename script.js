@@ -13,7 +13,10 @@ const simulatedDataStore = [
     { empid: "444", empname: "Julie", item: "Mouse", fromDate: "19-07-2023", toDate: "26-07-2023", status: "Overdue", icon: `<i class="bi bi-exclamation-circle-fill text-danger"></i>` }
 
 ];
-
+const defaultStatus = {
+    label: "Pending",
+    icon: `<i class="bi bi-hourglass-split text-warning"></i>`
+};
 let currentPage = 1;
 let rowsPerPage = 10;
 const form = document.getElementById("reservationForm");
@@ -21,9 +24,7 @@ const spinner = document.getElementById("spinner");
 const tableBody = document.querySelector("#staffTable tbody");
 const pagination = document.getElementById("pagination");
 const pageSizeSelect = document.getElementById("pageSize");
-// STEP 1 :
 let currentData = simulatedDataStore;
-
 function showTableSpinner() {
     tableBody.innerHTML = `
     <tr>
@@ -48,13 +49,14 @@ function renderTable(dataToRender = simulatedDataStore) {
         setupPagination();
         return;
     }
+
     setTimeout(() => {
         pageData.forEach((item, index) => {
             const row = document.createElement("tr");
             row.innerHTML = `
             <td>${item.fromDate}</td>
             <td>${item.item}</td>
-            <td>${item.icon} ${item.status}</td>
+            <td>${item.icon ? item.icon : ''} ${item.status}</td>
             <td>${item.toDate}</td>
         `;
             tableBody.appendChild(row);
@@ -90,19 +92,16 @@ pageSizeSelect.addEventListener("change", () => {
 
 // Initial load
 setupPagination();
-const defaultStatus = {
-    label: "Pending",
-    icon: `<i class="bi bi-hourglass-split text-warning"></i>`
-};
 form.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    // const empid = document.getElementById("empid").value.trim();
     const fromDate = document.getElementById("fromDate").value;
     const item = document.getElementById("item").value.trim();
     const status = `${defaultStatus.icon} ${defaultStatus.label}`;
     const toDate = document.getElementById("toDate").value;
     // Simulate POST request by pushing to array
+      if (fromDate == "" || item == ""  || status== "" || toDate == "") {
+    return; // skip this item, don't add row
+  }
     const simulatedResponse = {
         fromDate,
         item,
@@ -142,19 +141,19 @@ document.getElementById("reservationForm").addEventListener("submit", function (
     let isValid = true;
 
     // Employee ID
-    const nameInput = document.getElementById("empid");
+    const empInput = document.getElementById("empid");
     const errorMessage1 = document.getElementById("message1");
 
-    if (nameInput.value === "") {
-        nameInput.classList.add("is-invalid");
+    if (empInput.value === "") {
+        empInput.classList.add("is-invalid");
         isValid = false;
         errorMessage1.textContent = "Enter employee ID";
         errorMessage1.style.color = "#DC3545";
     }
-    nameInput.addEventListener("input", function () {
-        if (nameInput.classList.contains("is-invalid")) {
+    empInput.addEventListener("input", function () {
+        if (empInput.classList.contains("is-invalid")) {
             errorMessage1.textContent = "";
-            nameInput.classList.remove("is-invalid");
+            empInput.classList.remove("is-invalid");
         }
     });
 
@@ -420,4 +419,3 @@ function nextMonth() {
 }
 // Initialize
 renderCalendar(currentDate);
-
