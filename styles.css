@@ -94,7 +94,6 @@ p#message {
 /* Spinner style end*/
 
 .cover-page {
-    height: 70vh;
     display: flex;
     justify-content: center;
     margin-top: 5rem;
